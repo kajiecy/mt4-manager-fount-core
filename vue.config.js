@@ -71,14 +71,14 @@ module.exports = {
         // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#配置代理
         proxy:{
             '/myLocal':{
-                target: 'http://localhost:8080',
+                target: 'http://localhost:8080/',
                 changeOrigin: true,
                 pathRewrite:{
-                    '^/myManager':'/'
+                    '^/myLocal':'/'
                 }
             },
             '/myService':{
-                target: 'http://www.kajie88com/',
+                target: 'http://www.kajie88.com/',
                 changeOrigin: true,
                 pathRewrite:{
                     '^/myService':'/'

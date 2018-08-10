@@ -6,9 +6,8 @@
             <span style="display: inline-block;width: 10px;height: 24px;background-color: #409EFF;position: relative;top: 7px;margin: 0px 10px"></span>
             <span class="ft14">组织成员列表</span>
             <span>
-                <el-button type="primary" icon="el-icon-plus" circle size="mini"></el-button>
+                <el-button type="primary" @click="addUser()" icon="el-icon-plus" circle size="mini"></el-button>
             </span>
-            <span class="ft12 color-context">（当前成员：{{pageInfo.totalCount}}/0）</span>
             <!--<span style="float: right;font-size: 14px;padding: 5px 30px;"></span>-->
             <span style="display: inline-block;float: right;padding: 2px 10px">
                     <el-input
@@ -123,7 +122,11 @@
             this.loadTable();
         },
 
-        watch: {},
+        watch: {
+            searchUserName(){
+                this.loadTable();
+            }
+        },
         methods: {
             loadTable: function (){
                 this.$req.postPage(this.$store.state.app.interfaceURL.getUserList,
@@ -143,12 +146,14 @@
             },
             changeIndex: function (currentPage) {
                 this.pageInfo.currentPage = currentPage;
+                this.loadTable();
             },
             changeSize: function (pageSize) {
                 this.pageInfo.pageSize = pageSize;
+                this.loadTable();
             },
             editUser(userId){
-                alert(userId);
+                this.$router.push({name:'user-edit',query:{userId:userId}})
             },
             deleteUser(userId){
                 this.$confirm('确认删除此用户吗？', '提示', {
@@ -156,13 +161,22 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
+                    this.$req.post(this.$store.state.app.interfaceURL.deleteUserById,
+                        {
+                            id:userId
+                        }, data => {
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            this.loadTable();
+                        })
 
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
                 }).catch(() => {
                 });
+            },
+            addUser(){
+                this.$router.push({name:'user-edit'})
             }
         },
         computed: {},

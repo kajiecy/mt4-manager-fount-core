@@ -216,7 +216,7 @@
                                 localStorage.setItem("token",data.adminInfo.token);
                                 //取出 cookie的方法
 //                                alert(localStorage.getItem('token'));
-                                this.$router.push('/home');
+                                this.$router.push('/centermanager');
                             })
                     } else {
                     }

@@ -11,7 +11,7 @@ export const otherRouter = {
     component: Main,
     children: [
         {path: 'home', name: 'home', component: () => import('@/views/Welcome.vue')},
-        {path: '/custom', name: 'custom',meta:{title: 'div拖拽Demo'}, component: () => import('@/components/ShowIdComponents.vue')},
+        {path: '/user-edit', name: 'user-edit',meta:{title: '用户编辑页面'}, component: () => import('@/views/page/UserEdit.vue')},
     ]
 };
 

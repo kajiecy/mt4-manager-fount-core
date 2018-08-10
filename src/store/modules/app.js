@@ -9,14 +9,16 @@ const app = {
 
         menuList:[],
         breadcrumbArr:[{title:'首页',name:'home'}],
-        rootURL:'http://localhost:8080/',
+        rootURL:'myLocal',
         interfaceURL: {
-            readExcelTest:'test/readExcel',
-            receiveExcel:'test/receiveExcel',
-            login:'manager/login',
-            getLoginInfo:'manager/getLoginInfo',
-            getUserList:'user/getUserList',
-            deleteUserById:'user/deleteUserById',
+            readExcelTest:'/test/readExcel',
+            receiveExcel:'/test/receiveExcel',
+            login:'/manager/login',
+            getLoginInfo:'/manager/getLoginInfo',
+            getUserList:'/user/getUserList',
+            deleteUserById:'/user/deleteUserById',
+            getUserInfoById:'/user/getUserInfoById',
+            editUserInfo:'/user/editUserInfo',
         }
     },
     getters:{
