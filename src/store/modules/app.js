@@ -9,7 +9,8 @@ const app = {
 
         menuList:[],
         breadcrumbArr:[{title:'首页',name:'home'}],
-        rootURL:'myLocal',
+        // rootURL:'myLocal',
+        rootURL:'http://121.199.34.161:8080/mt4backstage',
         interfaceURL: {
             readExcelTest:'/test/readExcel',
             receiveExcel:'/test/receiveExcel',
@@ -19,6 +20,31 @@ const app = {
             deleteUserById:'/user/deleteUserById',
             getUserInfoById:'/user/getUserInfoById',
             editUserInfo:'/user/editUserInfo',
+
+            getMoneyInList:'/order/getMoneyInList',
+            getMoneyOutList:'/order/getMoneyOutList',
+            getMoneyInById:'/order/getMoneyInById',
+            getMoneyOutById:'/order/getMoneyOutById',
+            updateMoneyInRank:'/order/updateMoneyInRank',
+            updateMoneyOutRank:'/order/updateMoneyOutRank',
+
+            getNoticeList:'/notice/getNoticeList',
+            delNoticeById:'/notice/delNoticeById',
+            getNoticeInfo:'/notice/getNoticeInfo',
+            upNoticeInfoNoFile:'/notice/upNoticeInfoNoFile',
+
+            getChannelList:'/channel/getChannelList',
+            getChannelDomain:'/channel/getChannelDomain',
+            disposeChannel:'/channel/disposeChannel',
+            delChannel:'/channel/delChannel',
+            disposeBankInfo:'/channel/disposeBankInfo',
+            getBankDomain:'/channel/getBankDomain',
+            delBankInfo:'/channel/delBankInfo',
+
+            upNoticeInfo:'/notice/upNoticeInfo',
+
+            insertOutCheck:'/order/insertOutCheck',
+            getOutCheckList:'/order/getOutCheckList',
         }
     },
     getters:{

@@ -235,6 +235,28 @@
                     </div>
                 </el-form-item>
 
+                <el-form-item label="身份证正面">
+                    <div class="" style="width: 300px">
+                        <!--<el-input v-model="form.userCardUp" disabled></el-input>-->
+                        <img :src="form.userCardUp" style="width: 320px;height: 180px"/>
+                    </div>
+                </el-form-item>
+
+                <el-form-item label="身份证反面">
+                    <div class="" style="width: 300px">
+                        <!--<el-input v-model="form.userCardBack" disabled></el-input>-->
+                        <img :src="form.userCardBack" style="width: 320px;height: 180px"/>
+
+                    </div>
+                </el-form-item>
+
+                <el-form-item label="银行卡正面">
+                    <div class="" style="width: 300px">
+                        <!--<el-input v-model="form.bankCardUp" disabled></el-input>-->
+                        <img :src="form.bankCardUp" style="width: 320px;height: 180px"/>
+                    </div>
+                </el-form-item>
+
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('userEditForm')">保存</el-button>
                     <el-button @click="resetForm('userEditForm')">重置</el-button>
@@ -274,6 +296,9 @@
                     userGroup: "虚拟账户",
                     createTime: "",
                     accountType:"",
+                    userCardUp:"",
+                    userCardBack:"",
+                    bankCardUp:"",
                 },
                 rules:{
                     account: [

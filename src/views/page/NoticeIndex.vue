@@ -4,18 +4,21 @@
 
         <div style="padding-bottom: 8px">
             <span style="display: inline-block;width: 10px;height: 24px;background-color: #409EFF;position: relative;top: 7px;margin: 0px 10px"></span>
-            <span class="ft14">入金管理</span>
+            <span class="ft14">通告列表</span>
+            <span>
+                <el-button type="primary" @click="addNotice()" icon="el-icon-plus" circle size="mini"></el-button>
+            </span>
 
             <!--<span style="float: right;font-size: 14px;padding: 5px 30px;"></span>-->
             <span style="display: inline-block;float: right;padding: 2px 10px">
-                    <el-input
-                            class="searchPrj"
-                            size="small"
-                            placeholder="搜索成员姓名"
-                            prefix-icon="el-icon-search"
-                            v-model="searchUserName"
-                            clearable>
-                    </el-input>
+                    <!--<el-input-->
+                            <!--class="searchPrj"-->
+                            <!--size="small"-->
+                            <!--placeholder="搜索成员姓名"-->
+                            <!--prefix-icon="el-icon-search"-->
+                            <!--v-model="searchUserName"-->
+                            <!--clearable>-->
+                    <!--</el-input>-->
                 </span>
 
         </div>
@@ -37,50 +40,40 @@
                             label="id"
                             width="40">
                     </el-table-column>
+                    <el-table-column
+                            prop="title"
+                            label="主题"
+                            width="80">
+                    </el-table-column>
+                    <el-table-column
+                            prop=""
+                            width="180"
+                            label="缩略图">
 
-                    <el-table-column
-                            prop="orderNum"
-                            label="编号"
-                            width="150">
-                    </el-table-column>
-                    <el-table-column
-                            prop="assessName"
-                            width="80"
-                            label="通道名">
-                    </el-table-column>
-                    <el-table-column
-                            prop="userName"
-                            width="100"
-                            label="真实姓名">
-                    </el-table-column>
-                    <el-table-column
-                            prop="userAccount"
-                            label="MT4账号">
-                    </el-table-column>
-
-                    <el-table-column
-                            prop="money"
-                            label="金额">
                         <template slot-scope="scope">
-                            ￥{{scope.row.money}}
+                            <img :src="'data:image/jpg;base64,'+scope.row.picturePath" alt="" width="160" height="90">
                         </template>
-                    </el-table-column>
 
+                    </el-table-column>
+                    <el-table-column
+                            prop="noticeAbstract"
+                            label="摘要"
+                            width="250">
+                    </el-table-column>
                     <el-table-column
                             prop="createTime"
-                            label="注册时间"
-                            width="180">
+                            label="注册时间">
                     </el-table-column>
-                    <!--<el-table-column-->
-                            <!--prop=""-->
-                            <!--width="70"-->
-                            <!--label="排序">-->
+                    <el-table-column
+                            prop=""
+                            label="操作">
 
-                        <!--<template slot-scope="scope">-->
-                            <!--<el-input v-model="scope.row.rank" @blur="rankChange(scope.row)"></el-input>-->
-                        <!--</template>-->
+                        <template slot-scope="scope">
+                            <i @click="editNotice(scope.row.id)" class="iconfont icon-bianji"></i>
+                            <i @click="deleteNotice(scope.row.id)" class="iconfont icon-shanchu1"></i>
+                        </template>
 
-                    <!--</el-table-column>-->
+                    </el-table-column>
                 </el-table>
             </template>
 
@@ -102,13 +95,9 @@
 
 <script>
 
-
-    import ElInput from "../../../node_modules/element-ui/packages/input/src/input.vue";
-
     export default {
         data() {
             return {
-                searchUserName: '',
                 pageInfo: {
                     currentPage: 1,
                     pageSize: 15,
@@ -125,13 +114,11 @@
         },
 
         watch: {
-            searchUserName(){
-                this.loadTable();
-            }
+
         },
         methods: {
             loadTable: function (){
-                this.$req.postPage(this.$store.state.app.interfaceURL.getMoneyInList,
+                this.$req.postPage(this.$store.state.app.interfaceURL.getNoticeList,
                     {
                         likeName:this.searchUserName,
                     },
@@ -139,8 +126,8 @@
                     , (data,page) => {
                         console.log("for:index.html--> page is ---->",page)
                         console.log("for:index.html--> data is ---->",data)
-                        //alert(JSON.stringify(page));
-                        this.tableData = data.moneyInList;
+//                      alert(JSON.stringify(page));
+                        this.tableData = data.noticeList;
                         this.pageInfo.currentPage = parseInt(page.currentPage)
                         this.pageInfo.pageSize = parseInt(page.pageSize)
                         this.pageInfo.totalCount = parseInt(page.totalCount);
@@ -154,18 +141,18 @@
                 this.pageInfo.pageSize = pageSize;
                 this.loadTable();
             },
-            editUser(userId){
-                this.$router.push({name:'user-edit',query:{userId:userId}})
+            editNotice(noticeId){
+                this.$router.push({name:"notice-edit",query:{id:noticeId}})
             },
-            deleteUser(userId){
-                this.$confirm('确认删除此用户吗？', '提示', {
+            deleteNotice(noticeId){
+                this.$confirm('确认删除此公告吗？', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$req.post(this.$store.state.app.interfaceURL.deleteUserById,
+                    this.$req.post(this.$store.state.app.interfaceURL.delNoticeById,
                         {
-                            id:userId
+                            id:noticeId+""
                         }, data => {
                             this.$message({
                                 type: 'success',
@@ -177,22 +164,12 @@
                 }).catch(() => {
                 });
             },
-            addUser(){
-                this.$router.push({name:'user-edit'})
-            },
-            rankChange(rowInfo){
-//                console.log(rowInfo);
-                this.$req.post(this.$store.state.app.interfaceURL.updateMoneyInRank,
-                    {
-                        id:rowInfo.id+"",
-                        rank:rowInfo.rank+"",
-                    }, data => {
-                        this.loadTable();
-                    })
+            addNotice(){
+                this.$router.push({name:'notice-edit'})
             }
         },
         computed: {},
-        components: {ElInput},
+        components: {},
         // 路由离开时释放循环任务
         beforeRouteLeave(to, from, next) {
             next();

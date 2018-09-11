@@ -15,6 +15,6 @@
 <style src="./styles/common.css"></style>
 
 <style>
-  @import "//at.alicdn.com/t/font_593720_ww889asen6.css";
+  @import "//at.alicdn.com/t/font_593720_lyycmf91zq.css";
 
 </style>
