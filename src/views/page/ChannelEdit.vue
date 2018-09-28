@@ -14,6 +14,19 @@
                     </div>
                 </el-form-item>
 
+                <el-form-item label="支付方式">
+                    <div class="" style="width: 300px">
+                        <el-select v-model="form.paytype" placeholder="请选择">
+                            <el-option
+                                    v-for="item in payTypeRecord"
+                                    :key="item.key"
+                                    :label="item.desc"
+                                    :value="item.key">
+                            </el-option>
+                        </el-select>
+                    </div>
+                </el-form-item>
+
                 <el-form-item label="状态">
                     <div class="" style="width: 300px">
                         <el-radio v-model="form.status" label="1" >开启</el-radio>
@@ -65,11 +78,18 @@
                     rank:'0',
                     payMin:'',
                     payMax:'',
-                    payLimit:''
+                    payLimit:'',
+                    paytype:""
                 },
                 rules:{
 
                 },
+                payTypeRecord:[
+                    {key:'funToPay',desc:'funToPay'},
+                    {key:'aoyou',desc:'遨游支付'},
+                    {key:'caiHuiTong',desc:'财汇通支付'},
+                    {key:'paySec',desc:'paySec支付'}
+                ]
             }
         },
         created() {
