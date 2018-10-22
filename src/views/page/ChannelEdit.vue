@@ -88,7 +88,8 @@
                     {key:'funToPay',desc:'funToPay'},
                     {key:'aoyou',desc:'遨游支付'},
                     {key:'caiHuiTong',desc:'财汇通支付'},
-                    {key:'paySec',desc:'paySec支付'}
+                    {key:'paySec',desc:'paySec支付'},
+                    {key:'fenshops4h5',desc:'fenshops H5支付'},
                 ]
             }
         },
