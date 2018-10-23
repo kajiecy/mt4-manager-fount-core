@@ -90,6 +90,8 @@
                     {key:'caiHuiTong',desc:'财汇通支付'},
                     {key:'paySec',desc:'paySec支付'},
                     {key:'fenshops4h5',desc:'fenshops H5支付'},
+                    {key:'wangyou5qr',desc:'华讯支付宝扫码支付'},
+                    {key:'wangyou5h5',desc:'华讯支付H5支付'},
                 ]
             }
         },
