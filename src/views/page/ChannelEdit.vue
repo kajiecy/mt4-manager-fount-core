@@ -91,7 +91,9 @@
                     {key:'paySec',desc:'paySec支付'},
                     {key:'fenshops4h5',desc:'fenshops H5支付'},
                     {key:'wangyou5qr',desc:'华讯支付宝扫码支付'},
-                    {key:'wangyou5h5',desc:'华讯支付H5支付'},
+                    {key:'wangyou5h5',desc:'华讯支付宝H5支付'},
+                    {key:'wangyou5WeChaQr',desc:'华讯微信扫码支付'},
+                    {key:'wangyou5WeChaH5',desc:'华讯微信H5支付'},
                 ]
             }
         },
