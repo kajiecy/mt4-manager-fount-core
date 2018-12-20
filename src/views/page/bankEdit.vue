@@ -81,32 +81,37 @@
                         </el-upload>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY 名称">
+                <el-form-item :label="channelInfo.paytype+' 名称'">
                     <div class="" style="width: 300px">
                         <el-input v-model="form.rpnPayName"></el-input>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY 商户号">
+                <el-form-item :label="channelInfo.paytype+'  商户号'">
                     <div class="" style="width: 300px">
                         <el-input v-model="form.rpnPayNo"></el-input>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY KEY">
+                <el-form-item :label="channelInfo.paytype+'  KEY'">
                     <div class="" style="width: 300px">
                         <el-input v-model="form.rpnPayKey"></el-input>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY VERSION">
+                <el-form-item :label="channelInfo.paytype+'  VERSION'">
                     <div class="" style="width: 300px">
                         <el-input v-model="form.rpnPayVersion"></el-input>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY 银行BRAKID">
+                <el-form-item :label="channelInfo.paytype+'  银行BRAKID'">
                     <div class="" style="width: 300px">
                         <el-input v-model="form.rpnPayBankId"></el-input>
                     </div>
                 </el-form-item>
-                <el-form-item label="RPN PAY 即时到账可选银行：">
+                <el-form-item :label="channelInfo.paytype+'  银行银行链接'">
+                    <div class="" style="width: 300px">
+                        <el-input v-model="form.bankUrl"></el-input>
+                    </div>
+                </el-form-item>
+                <el-form-item :label="channelInfo.paytype+'  即时到账可选银行：'">
                     <div class="" style="width: 300px">
                         <el-select v-model="form.rpnPayToBank" placeholder="请选择">
                             <el-option value="CMB_D" label="招商银行总行"></el-option>
@@ -166,6 +171,7 @@
                     rpnPayToBank:'',
                     rank:'0',
                     channelId:this.$route.query.channelId,
+                    bankUrl:'',
                 },
                 rules:{
 
@@ -185,7 +191,8 @@
                 }, {
                     value: 'GBP',
                     label: '英镑（汇率：0.64529997）'
-                }]
+                }],
+                channelInfo:{},
             }
         },
         created() {
@@ -198,7 +205,15 @@
         watch: {},
         methods: {
             loadChannelInfo(){
-                if(this.channelId!==undefined){
+                this.$req.post(this.$store.state.app.interfaceURL.getChannelDomain,
+                    {id:this.$route.query.channelId.toString()}, data => {
+                        console.log("getChannelDomain",data)
+                        this.channelInfo = data.channelDomain;
+                    })
+
+
+
+                if(this.channelId!=undefined){
                     this.$req.post(this.$store.state.app.interfaceURL.getBankDomain,
                         {id:this.channelId.toString()}, data => {
                             console.log("loadChannelInfo from ChannelEdit.vue",data)
@@ -272,6 +287,9 @@
         computed: {
             channelId() {
                 return this.$route.query.id;
+            },
+            payType(){
+                return this.$store.query.paytype;
             }
         },
         components: {

@@ -54,7 +54,7 @@
                                 </template>
                             </div>
                             <div class="dis_table_cell textleft pt5 pb5">
-                                <el-button size="mini" @click="editBank(cItem)">编辑</el-button>
+                                <el-button size="mini" @click="editBank(cItem,item)">编辑</el-button>
                                 <el-button size="mini"  type="danger" plain @click="delBank(cItem)">删除</el-button>
                             </div>
                         </div>
@@ -116,10 +116,10 @@
                 });
             },
             addBankInfo(row){
-                this.$router.push({name:'bank-edit',query:{channelId:row.id}})
+                this.$router.push({name:'bank-edit',query:{channelId:row.id,paytype:row.paytype}})
             },
-            editBank(row){
-                this.$router.push({name:'bank-edit',query:{id:row.id}})
+            editBank(row,channel){
+                this.$router.push({name:'bank-edit',query:{id:row.id,channelId:channel.id,paytype:channel.paytype}})
             },
             delBank(row){
                 this.$confirm('确定要删除此银行吗?', '提示', {

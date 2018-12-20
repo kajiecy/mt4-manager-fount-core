@@ -86,14 +86,15 @@
                 },
                 payTypeRecord:[
                     {key:'funToPay',desc:'funToPay'},
-                    {key:'aoyou',desc:'遨游支付'},
-                    {key:'caiHuiTong',desc:'财汇通支付'},
-                    {key:'paySec',desc:'paySec支付'},
-                    {key:'fenshops4h5',desc:'fenshops H5支付'},
-                    {key:'wangyou5qr',desc:'华讯支付宝扫码支付'},
-                    {key:'wangyou5h5',desc:'华讯支付宝H5支付'},
-                    {key:'wangyou5WeChaQr',desc:'华讯微信扫码支付'},
-                    {key:'wangyou5WeChaH5',desc:'华讯微信H5支付'},
+                    {key:'遨游支付',desc:'遨游支付'},
+                    {key:'财汇通支付',desc:'财汇通支付'},
+                    {key:'paySec支付',desc:'paySec支付'},
+                    {key:'fenshops H5支付',desc:'fenshops H5支付'},
+                    {key:'华讯支付宝扫码支付',desc:'华讯支付宝扫码支付'},
+                    {key:'华讯支付宝H5支付',desc:'华讯支付宝H5支付'},
+                    {key:'华讯微信扫码支付',desc:'华讯微信扫码支付'},
+                    {key:'华讯微信H5支付',desc:'华讯微信H5支付'},
+                    {key:'转账支付',desc:'转账支付'},
                 ]
             }
         },
@@ -107,6 +108,9 @@
         watch: {},
         methods: {
             loadChannelInfo(){
+
+
+
                 if(this.channelId!==undefined){
                     this.$req.post(this.$store.state.app.interfaceURL.getChannelDomain,
                         {id:this.channelId.toString()}, data => {
